@@ -1,0 +1,44 @@
+//
+// Copyright (C) 2019 GlobalLogic
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+
+//###############################################################################
+// Android ipl image pack tools for host                                        #
+//###############################################################################
+
+cc_binary_host {
+
+    cflags: [
+        "-Wno-packed",
+        "-DPACK_IPL_EMCC",
+    ],
+
+    srcs: [
+        "host.c",
+        "common.c",
+    ],
+
+    local_include_dirs: ["."],
+    // Include offsets from IPLs for making it always consistant with pack_ipl_emmc
+    include_dirs: ["./device/renesas/bootloaders/ipl/tools/dummy_create/"],
+
+    static_libs: ["libcrypto", "libssl"],
+
+    stl: "libc++_static",
+
+    static_executable: true,
+
+    name: "pack_ipl_emmc",
+}
